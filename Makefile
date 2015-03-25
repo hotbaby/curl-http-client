@@ -1,9 +1,17 @@
-TARGET = curl_test
+CC = gcc
+CFLAGS = -Werror
+LDFLAGS = -lcurl
+TARGET = subscriber
+OBJS += subscriber.o
 
-all: curl_test
+all: $(TARGET)
 
-$(TARGET):
-	gcc curl_test.c -lcurl -o $@
+$(TARGET):$(OBJS)
+	$(CC) $(OBJS) $(LDFLAGS) -o $@
 
-clear:
+subscriber.o:subscriber.c
+	$(CC) -c subscriber.c -o $@
+
+clean:
 	rm $(TARGET) -rf
+	rm $(OBJS) -rf
